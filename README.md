@@ -3,5 +3,6 @@
 ## 👥 Integrantes
 * **Roberth Idrobo**
 * **Claudia Montilla**
+* **Sebastian Briceño**
 
 ---
