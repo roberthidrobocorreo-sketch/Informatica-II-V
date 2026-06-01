@@ -1,0 +1,26 @@
+[
+  {
+    "cedula": "30123456",
+    "nombre": "Claudia Montilla",
+    "nota1": 18,
+    "nota2": 19,
+    "nota3": 17,
+    "nota4": 20
+  },
+  {
+    "cedula": "32746248",
+    "nombre": "Roberth Idrobo",
+    "nota1": 20,
+    "nota2": 20,
+    "nota3": 20,
+    "nota4": 20
+  },
+  {
+    "cedula": "15043147",
+    "nombre": "Yorbeliz Salas",
+    "nota1": 14,
+    "nota2": 14,
+    "nota3": 14,
+    "nota4": 14
+  }
+]

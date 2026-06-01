@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Tabla de Calificaciones</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background-color: #f3f4f6; padding: 40px; display: flex; justify-content: center; }
+        .container { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); width: 100%; max-width: 900px; border: 1px solid #e5e7eb; }
+        h2 { color: #1e3a8a; margin-top: 0; padding-bottom: 15px; border-bottom: 2px solid #f1f5f9; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 15px; }
+        th { background: #1e293b; color: white; padding: 14px; text-align: left; font-size: 13px; text-transform: uppercase; }
+        td { padding: 12px 14px; border-bottom: 1px solid #e5e7eb; color: #4b5563; }
+        tr:nth-child(even) td { background-color: #f8fafc; }
+        .promedio { font-weight: bold; color: #2563eb; }
+        .btn-back { display: inline-block; background: #f3f4f6; color: #4b5563; padding: 10px 20px; text-decoration: none; border-radius: 6px; font-size: 14px; font-weight: 600; border: 1px solid #e5e7eb; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>📋 Control de Calificaciones Evaluadas</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Cédula</th>
+                    <th>Nombre y Apellido</th>
+                    <th>Corte 1</th>
+                    <th>Corte 2</th>
+                    <th>Corte 3</th>
+                    <th>Corte 4</th>
+                    <th>Promedio</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (estudiantes && estudiantes.length > 0) { %>
+                    <% estudiantes.forEach(e => { %>
+                        <% let prom = ((e.nota1 + e.nota2 + e.nota3 + e.nota4) / 4).toFixed(2); %>
+                        <tr>
+                            <td><strong><%= e.cedula %></strong></td>
+                            <td><%= e.nombre %></td>
+                            <td><%= e.nota1 %></td>
+                            <td><%= e.nota2 %></td>
+                            <td><%= e.nota3 %></td>
+                            <td><%= e.nota4 %></td>
+                            <td class="promedio"><%= prom %></td>
+                        </tr>
+                    <% }); %>
+                <% } else { %>
+                    <tr>
+                        <td colspan="7" style="text-align: center; color: #9ca3af;">No hay alumnos registrados.</td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+        <a href="/" class="btn-back">↩ Menú Principal</a>
+    </div>
+</body>
+</html>

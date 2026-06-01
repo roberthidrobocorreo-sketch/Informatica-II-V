@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Modificar Notas</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background-color: #f3f4f6; padding: 40px; display: flex; justify-content: center; }
+        .card { background: white; padding: 35px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); width: 100%; max-width: 450px; border: 1px solid #e5e7eb; }
+        h2 { color: #1e3a8a; margin-top: 0; padding-bottom: 15px; border-bottom: 2px solid #f1f5f9; }
+        .search-box { display: flex; gap: 10px; margin-bottom: 20px; }
+        input { padding: 10px; border: 1px solid #d1d5db; border-radius: 6px; box-sizing: border-box; }
+        .btn-dark { background: #1e293b; color: white; border: none; padding: 10px 15px; border-radius: 6px; cursor: pointer; font-weight: 600; }
+        .group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: 600; color: #4b5563; font-size: 14px; }
+        .grid-notas { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+        .btn-update { width: 100%; background: #2563eb; color: white; border: none; padding: 12px; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 15px; }
+        .btn-back { display: block; text-align: center; margin-top: 15px; color: #6b7280; text-decoration: none; font-size: 14px; }
+        .error { background: #fef2f2; color: #991b1b; padding: 10px; border-radius: 6px; border: 1px solid #fee2e2; font-size: 14px; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>⚙️ Modificar Notas</h2>
+        <form action="/modificar" method="GET" class="search-box">
+            <input 
+                type="text" 
+                name="cedula" 
+                value="<%= cedulaBuscar || '' %>" 
+                placeholder="Cédula a buscar..." 
+                style="flex-grow: 1;" 
+                required
+                minlength="8"
+                maxlength="8"
+                pattern="\d{8}"
+                title="Debes ingresar una cédula exacta de 8 dígitos numéricos"
+            >
+            <button type="submit" class="btn-dark">Buscar</button>
+        </form>
+
+        <% if (cedulaBuscar) { %>
+            <% if (estudiante) { %>
+                <form action="/modificar" method="POST">
+                    <input type="hidden" name="cedula" value="<%= estudiante.cedula %>">
+       
+                    <div class="group"><label>Cédula:</label><input type="text" value="<%= estudiante.cedula %>" disabled style="background:#f3f4f6;"></div>
+                    <div class="group"><label>Estudiante:</label><input type="text" name="nombre" value="<%= estudiante.nombre %>" required></div>
+                    <div class="group">
+                        <label>Notas:</label>
+                        <div class="grid-notas">
+                            <input type="number" name="nota1" value="<%= estudiante.nota1 %>" min="0" max="20" step="0.1" required>
+                            <input type="number" name="nota2" value="<%= estudiante.nota2 %>" min="0" max="20" step="0.1" required>
+                            <input type="number" name="nota3" value="<%= estudiante.nota3 %>" min="0" max="20" step="0.1" required>
+                            <input type="number" name="nota4" value="<%= estudiante.nota4 %>" min="0" max="20" step="0.1" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-update">💾 Guardar Cambios</button>
+                </form>
+            <% } else { %>
+                <p class="error">❌ Alumno no encontrado.</p>
+            <% } %>
+        <% } %>
+        <a href="/" class="btn-back">↩ Menú Principal</a>
+    </div>
+</body>
+</html>

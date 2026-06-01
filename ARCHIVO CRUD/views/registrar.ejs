@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Registrar Alumno</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background-color: #f3f4f6; padding: 40px; display: flex; justify-content: center; }
+        .card { background: white; padding: 35px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); width: 100%; max-width: 450px; border: 1px solid #e5e7eb; }
+        h2 { color: #1e3a8a; margin-top: 0; padding-bottom: 15px; border-bottom: 2px solid #f1f5f9; }
+        .group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: 600; color: #4b5563; font-size: 14px; }
+        input { width: 100%; padding: 10px; border: 1px solid #d1d5db; border-radius: 6px; box-sizing: border-box; }
+        .grid-notas { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+        .btn-submit { background: #2563eb; color: white; border: none; padding: 12px; width: 100%; border-radius: 6px; font-weight: bold; cursor: pointer; margin-top: 15px; font-size: 15px; }
+        .btn-back { display: block; text-align: center; margin-top: 15px; color: #6b7280; text-decoration: none; font-size: 14px; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>📝 Registrar Alumno</h2>
+        
+        <% if (typeof error !== 'undefined' && error) { %>
+            <div style="background: #fef2f2; color: #991b1b; padding: 12px; border-radius: 6px; border: 1px solid #fee2e2; font-size: 14px; margin-bottom: 15px; font-weight: 500;">
+                ❌ <%= error %>
+            </div>
+        <% } %>
+
+        <form action="/registrar" method="POST">
+            <div class="group">
+                <label>Cédula:</label>
+                <input 
+                    type="text" 
+                    name="cedula" 
+                    required 
+                    minlength="8" 
+                    maxlength="8" 
+                    pattern="\d{8}" 
+                    title="La cédula debe tener exactamente 8 dígitos numéricos" 
+                    placeholder="Ej. 30123456"
+                >
+            </div>
+            <div class="group"><label>Nombre:</label><input type="text" name="nombre" required></div>
+            <div class="group"><label>Apellido:</label><input type="text" name="apellido" required></div>
+            <div class="group">
+                <label>Notas de los 4 Cortes (0-20):</label>
+                <div class="grid-notas">
+                    <input type="number" name="nota1" min="0" max="20" step="0.1" placeholder="N1" required>
+                    <input type="number" name="nota2" min="0" max="20" step="0.1" placeholder="N2" required>
+                    <input type="number" name="nota3" min="0" max="20" step="0.1" placeholder="N3" required>
+                    <input type="number" name="nota4" min="0" max="20" step="0.1" placeholder="N4" required>
+                </div>
+            </div>
+            <button type="submit" class="btn-submit">💾 Guardar en el Sistema</button>
+        </form>
+        <a href="/" class="btn-back">↩ Volver</a>
+    </div>
+</body>
+</html>
